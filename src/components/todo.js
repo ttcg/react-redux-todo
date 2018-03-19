@@ -6,33 +6,35 @@ class Todo extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {       
-      tasks: props.tasks,
+    this.state = {      
       value: ''
     };
   }
 
   handleTextChange = (e) => {
     this.setState({
-      value: e.target.value
+      value: e.target.value.trim()
     });    
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.value)
+    if (!this.state.value) {
       alert('Please enter something to add a task.');
+      return;
+    }
 
     this.props.addTodoItem(this.state.value);
     this.setState({ value: '' });
   }
 
   render() {
-    const { value, tasks } = this.state;
+    const { value } = this.state;
+    const { tasks } = this.props;
     
     return (
 
-      <React.Fragment>
+      <div style={{marginLeft: 20}}>
 
         <form onSubmit={this.handleSubmit}>
         Type Task: <input type="textbox" value={value}
@@ -49,12 +51,13 @@ class Todo extends Component {
           </ol>
         </div>
 
-      </React.Fragment>
+      </div>
 
     );
   }
 }
 
+// TODO: Refactor to use a container
 const mapStateToProps = state => {
   return { tasks: state.tasks };
 };
