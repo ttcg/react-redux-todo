@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/header'
 
 import Todo from './components/todo';
+
+import TodoForm from './containers/todo-form';
 
 class App extends Component {  
 
@@ -13,14 +14,11 @@ class App extends Component {
 
       <React.Fragment>
 
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">React Redux Todo App</h1>
-          </header>                       
-        </div>
+        <Header />
 
         <Todo /> 
+
+        <TodoForm />
 
       </React.Fragment>
 

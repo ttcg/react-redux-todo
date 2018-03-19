@@ -30,26 +30,15 @@ class Todo extends Component {
 
   render() {
     const { value } = this.state;
-    const { tasks } = this.props;
+    
     
     return (
 
       <div style={{marginLeft: 20}}>
 
-        <form onSubmit={this.handleSubmit}>
-        Type Task: <input type="textbox" value={value}
-              onChange={this.handleTextChange}
-            />&nbsp;
-            <input type="submit" value="Add Task" />  
-        </form>
+        
 
-        <div>
-          <ol>
-            {tasks.map((item, i) =>            
-                <li key={i}>{item}</li>
-            )}
-          </ol>
-        </div>
+        
 
       </div>
 
