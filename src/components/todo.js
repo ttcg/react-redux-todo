@@ -13,13 +13,13 @@ class Todo extends Component {
 
   handleTextChange = (e) => {
     this.setState({
-      value: e.target.value.trim()
+      value: e.target.value
     });    
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.value) {
+    if (!this.state.value.trim()) {
       alert('Please enter something to add a task.');
       return;
     }
