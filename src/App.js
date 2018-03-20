@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import Header from './components/header'
 
-import Todo from './components/todo';
-
 import TodoForm from './containers/todo-form';
+import TodoList from './containers/todo-list';
 
 class App extends Component {  
 
@@ -16,9 +15,11 @@ class App extends Component {
 
         <Header />
 
-        <Todo /> 
+        <div style={{marginLeft: 30}}>
+          <TodoForm />
 
-        <TodoForm />
+          <TodoList />
+        </div>
 
       </React.Fragment>
 

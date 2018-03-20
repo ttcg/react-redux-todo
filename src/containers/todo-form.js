@@ -1,20 +1,12 @@
-import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { addTodoItem } from "../actions/index";
+import { addTodoItem } from "../actions";
 
-import TodoList from '../components/todo-list';
 import AddTodo from '../components/add-todo';
 
-class TodoForm extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    addTodoItem: todo => dispatch(addTodoItem(todo))
+  };
+};
 
-    render () {
-        return (
-            <div style={{marginLeft: 20}}>
-                <AddTodo />
-                <TodoList />
-            </div>
-        );
-    }
-}
-
-export default TodoForm;
+export default connect(null, mapDispatchToProps) (AddTodo);
