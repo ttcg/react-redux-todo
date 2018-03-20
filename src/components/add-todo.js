@@ -27,7 +27,6 @@ class AddTodo extends Component {
     }
 
     render () { 
-
         const { value } = this.state;
         
         return (
