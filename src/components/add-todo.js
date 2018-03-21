@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddTodo extends Component {
 
@@ -8,6 +9,10 @@ class AddTodo extends Component {
             value: ''
         };
     }    
+
+    static propTypes = {
+        addTodoItem: PropTypes.func.isRequired
+    }
 
     handleTextChange = (e) => {
         this.setState({
