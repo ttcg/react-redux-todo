@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import ReactNbsp from 'react-nbsp';
+import ReactNbsp from 'react-nbsp';
 
 
 const TodoGrid = (props) => {
@@ -19,7 +19,7 @@ const TodoGrid = (props) => {
                     tasks.length > 0 
                     ? tasks.map((item, i) =>    
                         <li key={i} style={{lineHeight: '30px'}}>
-                            {item}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                            {item}<ReactNbsp count={5} />
                             <span style={{color:'red', cursor: 'pointer'}} onClick={() => handleRemove(i)}>Remove</span>
                         </li>
                     )
