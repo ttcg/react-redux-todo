@@ -7,8 +7,10 @@ import './index.css';
 import App from './components/App';
 import store from "./store/index";
 
-import AddNewTodo from './components/todo/addnewtodo';
+
 import Home from './components/home/home';
+import About from './components/about/about';
+import AddNewTodo from './components/todo/addnewtodo';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +20,9 @@ ReactDOM.render(
       <React.Fragment>
         <Route component={App} />
         <Route path='/home' component={Home} />
-        <Route path='/todo/addnew' component={AddNewTodo} />        
+        <Route path='/about' component={About} />     
+        <Route path='/todo/add' component={AddNewTodo} />        
+
       </React.Fragment>
     </BrowserRouter>
   </Provider>, document.getElementById('root'));
