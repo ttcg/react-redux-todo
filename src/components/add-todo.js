@@ -5,10 +5,10 @@ class AddTodo extends Component {
 
     constructor() {
         super();
-        this.state = {      
+        this.state = {
             value: ''
         };
-    }    
+    }
 
     static propTypes = {
         addTodoItem: PropTypes.func.isRequired
@@ -16,8 +16,8 @@ class AddTodo extends Component {
 
     handleTextChange = (e) => {
         this.setState({
-        value: e.target.value
-        });    
+            value: e.target.value
+        });
     }
 
     handleSubmit = (e) => {
@@ -31,18 +31,18 @@ class AddTodo extends Component {
         this.setState({ value: '' });
     }
 
-    render () { 
+    render() {
         const { value } = this.state;
-        
+
         return (
             <form onSubmit={this.handleSubmit}>
-            Type Task: <input type="textbox" value={value}
-                onChange={this.handleTextChange}
+                Type Task: <input type="textbox" value={value}
+                    onChange={this.handleTextChange}
                 />&nbsp;
-                <input type="submit" value="Add Task" />              
+                <input type="submit" value="Add Task" />
             </form>
         );
     }
-} 
+}
 
 export default AddTodo;

@@ -1,41 +1,42 @@
 import React, { Component } from 'react';
-import { 
+import {
+	Button,
 	Col,
 	Container,
 	Jumbotron,
-	Row 
-	 	} from 'reactstrap';
+	Row
+} from 'reactstrap';
 
 export default class Home extends Component {
-  	render() {
+	render() {
 		return (
-		<React.Fragment>
-			<Jumbotron>
+			<React.Fragment>
+				<Jumbotron>
+					<Container>
+						<h1 className="display-3">React Redux Todo</h1>
+						<p className="lead">Demo website which uses React and Redux technology.  It contains basic CRUD activities.</p>
+					</Container>
+				</Jumbotron>
 				<Container>
-					<h1 className="display-3">Home Page</h1>
-					<p className="lead">This is a Home Page</p>
+					<Row>
+						<Col md="4">
+							<h2>View Todo List</h2>
+							<p>You can view the list of todo items and filter the items such as outstanding, overdue, etc.</p>
+							<p><Button color="primary" href="/todo">View Todo &raquo;</Button></p>
+						</Col>
+						<Col md="4">
+							<h2>Add New Todo</h2>
+							<p>You can add a new todo item by clicking the following button.</p>
+							<p><Button color="primary" href="/todo/add">Add New &raquo;</Button></p>
+						</Col>
+						<Col md="4">
+							<h2>About</h2>
+							<p>Please click the following button to view the detail of the project.</p>
+							<p><Button color="primary" href="/about">View Details &raquo;</Button></p>
+						</Col>
+					</Row>
 				</Container>
-			</Jumbotron>
-			<Container>
-				<Row>
-					<Col md="4">
-						<h2>View Todo List</h2>
-						<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            			<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-					</Col>
-					<Col md="4">
-						<h2>Add New Todo</h2>
-						<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            			<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-					</Col>
-					<Col md="4">
-						<h2>About</h2>
-						<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            			<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-					</Col>
-				</Row>
-			</Container>
-		</React.Fragment>
+			</React.Fragment>
 		)
-  	}
+	}
 }
