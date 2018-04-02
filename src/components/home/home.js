@@ -7,6 +7,8 @@ import {
 	Row
 } from 'reactstrap';
 
+import { Link } from 'react-router-dom';
+
 export default class Home extends Component {
 	render() {
 		return (
@@ -22,17 +24,23 @@ export default class Home extends Component {
 						<Col md="4">
 							<h2>View Todo List</h2>
 							<p>You can view the list of todo items and filter the items such as outstanding, overdue, etc.</p>
-							<p><Button color="primary" href="/todo">View Todo &raquo;</Button></p>
+							<p>
+								<Link to="/todo"><Button color="primary">View Todo &raquo;</Button></Link>
+							</p>
 						</Col>
 						<Col md="4">
 							<h2>Add New Todo</h2>
 							<p>You can add a new todo item by clicking the following button.</p>
-							<p><Button color="primary" href="/todo/add">Add New &raquo;</Button></p>
+							<p>
+								<Link to="/todo/add"><Button color="primary">Add New &raquo;</Button></Link>
+							</p>
 						</Col>
 						<Col md="4">
 							<h2>About</h2>
 							<p>Please click the following button to view the detail of the project.</p>
-							<p><Button color="primary" href="/about">View Details &raquo;</Button></p>
+							<p>
+								<Link to="/about"><Button color="primary">Add Details &raquo;</Button></Link>
+							</p>
 						</Col>
 					</Row>
 				</Container>

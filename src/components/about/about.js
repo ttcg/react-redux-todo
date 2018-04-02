@@ -6,6 +6,16 @@ export default class About extends Component {
 		return (
 			<Container>
 				<h4>About</h4>
+				<p>Demo website which uses React and Redux technology.  It contains basic CRUD activities.</p>
+				<p>It uses the .Net Core services hosted on GCP and the services can be viewed <a href="http://35.195.110.121/" target="_blank">here</a>.</p>
+				<p>This app uses the following libraries:
+					<ul>
+						<li>Axios</li>
+						<li>React-Redux</li>
+						<li>React-Router</li>
+						<li>ReactStrap@Next</li>
+					</ul>
+				</p>
 			</Container>
 		)
 	}
