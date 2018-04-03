@@ -39,7 +39,7 @@ export default class Home extends Component {
 							<h2>About</h2>
 							<p>Please click the following button to view the detail of the project.</p>
 							<p>
-								<Link to="/about"><Button color="primary">Add Details &raquo;</Button></Link>
+								<Link to="/about"><Button color="primary">View Details &raquo;</Button></Link>
 							</p>
 						</Col>
 					</Row>

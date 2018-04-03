@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <Navbar dark expand="md" fixed color="dark">
+        <Navbar dark expand="md" sticky="top" color="dark">
             <NavbarBrand href="/">React Todo</NavbarBrand>
             <NavbarToggler />
             <Collapse navbar>
