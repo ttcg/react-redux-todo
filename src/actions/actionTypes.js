@@ -1,2 +1,3 @@
 export const ADD_TODO_ITEM = "ADD_TODO_ITEM";
 export const REMOVE_TODO_ITEM = "REMOVE_TODO_ITEM";
+export const LOAD_TODO_SUCCESS = 'LOAD_TODO_SUCCESS';
