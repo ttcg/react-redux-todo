@@ -14,6 +14,7 @@ export default class About extends Component {
 						<li>React-Redux</li>
 						<li>React-Router</li>
 						<li>ReactStrap@Next</li>
+						<li>React-Thunk</li>
 					</ul>
 				</p>
 			</Container>

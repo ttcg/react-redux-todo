@@ -3,11 +3,26 @@ import {
     Container,
     Table
 } from 'reactstrap';
+import Moment from 'react-moment';
 
 export default class ListTodo extends Component {
     render() {
 
         const { tasks } = this.props;
+
+        const rows = tasks.map((item, i) => (
+            <tr key={item.id}>
+                <th scope="row">{i + 1}</th>
+                <td>{item.taskItem}</td>
+                <td>{item.hasDone}</td>
+                <td>{
+                    item.doneBy ?
+                    <Moment date={item.doneBy} format="DD/MM/YYYY"  /> : ''}</td>
+                <td>Action buttons</td>
+            </tr>
+        )
+        );
+
         return (
             <Container>
                 <h4>List Todo</h4>
@@ -25,16 +40,7 @@ export default class ListTodo extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {tasks.map((item, i) =>
-                                    <tr key={i}>
-                                    <th scope="row">{i+1}</th>
-                                    <td>{item}</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>Action buttons</td>
-                                </tr>
-                                )
-                            }
+                                {rows}
                             </tbody>
                         </Table>
 

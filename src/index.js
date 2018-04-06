@@ -8,6 +8,10 @@ import store from "./store/index";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import {loadTodoItems} from './actions/'
+
+store.dispatch(loadTodoItems());
+
 ReactDOM.render(
 	<Provider store={store}>
 		<App />

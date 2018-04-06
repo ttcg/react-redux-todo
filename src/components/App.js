@@ -23,7 +23,7 @@ class App extends Component {
 
 					<Route path='(/|/home)' exact component={Home} />					
 					<Route path='/about' component={About} />
-					<Route path='/todo' exact component={ListTodo} />
+					<Route path='/todo' exact component={TodoListPage} />
 					<Route path='/todo/add' component={AddNewTodo} />
 
 					<Footer />
