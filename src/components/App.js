@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import Header from './common/header'
+import Header from './common/header';
+import Footer from './common/footer';
 
 import Home from '../components/home/home';
 import About from '../components/about/about';
@@ -16,17 +17,18 @@ class App extends Component {
 
 		return (
 			<BrowserRouter>
-				<div className="bg-light">
+				<React.Fragment>
+					
 					<Header />
-					<React.Fragment>
-						<Route path='(/|/home)' exact component={Home} />
-						{/* <Route path='/home' component={Home} /> */}
-						<Route path='/about' component={About} />
-						<Route path='/todo' exact component={TodoListPage} />
-						<Route path='/todo/add' component={AddNewTodo} />						
-					</React.Fragment>
 
-				</div>
+					<Route path='(/|/home)' exact component={Home} />					
+					<Route path='/about' component={About} />
+					<Route path='/todo' exact component={ListTodo} />
+					<Route path='/todo/add' component={AddNewTodo} />
+
+					<Footer />
+
+				</React.Fragment>				
 			</BrowserRouter>
 
 		);
