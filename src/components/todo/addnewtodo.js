@@ -8,6 +8,7 @@ import {
 	Input,
 	Label
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class AddNewTodo extends Component {
 	render() {
@@ -40,7 +41,12 @@ export default class AddNewTodo extends Component {
 					</FormGroup>
 					<FormGroup row>
 						<Col sm={{ size: 10, offset: 2 }}>
-							<Button>Submit</Button>
+							<Button color="primary">Submit</Button>
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Col sm={{ size: 10, offset: 2 }}>
+							<Link to="/todo">Back to List</Link>
 						</Col>
 					</FormGroup>
 				</Form>
