@@ -20,9 +20,9 @@ export default class Header extends React.Component {
     }
 
     toggleNavbar = () => {
-        this.setState({
-            collapsed: !this.state.collapsed
-        });
+        this.setState(prevState => ({
+            collapsed: !prevState.collapsed
+        }));
     }
 
     render() {
