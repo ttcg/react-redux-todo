@@ -7,8 +7,8 @@ import Footer from './common/footer';
 
 import Home from '../components/home/home';
 import About from '../components/about/about';
-import AddNewTodo from '../components/todo/addnewtodo';
-import TodoListPage from '../containers/todoListPage';
+import AddTodoPage from '../containers/AddTodoPage';
+import TodoListPage from '../containers/TodoListPage';
 
 
 class App extends Component {
@@ -24,7 +24,7 @@ class App extends Component {
 					<Route path='(/|/home)' exact component={Home} />					
 					<Route path='/about' component={About} />
 					<Route path='/todo' exact component={TodoListPage} />
-					<Route path='/todo/add' component={AddNewTodo} />
+					<Route path='/todo/add' component={AddTodoPage} />
 
 					<Footer />
 

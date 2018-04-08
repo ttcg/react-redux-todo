@@ -8,9 +8,9 @@ import store from "./store/index";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {loadTodoItems} from './actions/'
+// import {loadTodoItems} from './actions/'
 
-store.dispatch(loadTodoItems());
+// store.dispatch(loadTodoItems());
 
 ReactDOM.render(
 	<Provider store={store}>

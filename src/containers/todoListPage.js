@@ -7,10 +7,10 @@ import {
 	Container,
 	Row
 } from 'reactstrap';
-//import { removeTodoItem } from "../actions";
+import PropTypes from 'prop-types';
 
 import ListTodo from '../components/todo/ListTodo';
-//import { loadTodoItems } from '../actions/';
+import { loadTodoItems } from '../actions/';
 
 // const mapDispatchToProps = dispatch => {
 //   return {
@@ -21,20 +21,20 @@ import ListTodo from '../components/todo/ListTodo';
 //export default connect(mapStateToProps,mapDispatchToProps) (ListTodo);
 
 
-class todoListPage extends Component {
-	constructor(props) {
-		super(props)
+class TodoListPage extends Component {
 
-		this.state = {
 
-		}
+	static propTypes = {
+		tasks: PropTypes.array.isRequired
 	}
 
-	// 	componentDidMount = () => {
+	static defaultProps = {
+		tasks: []
+	}
 
-
-	// this.store.dispatch(loadTodoItems());
-	// 	}
+	componentDidMount = () => {
+		this.props.dispatch(loadTodoItems());
+	}
 
 	render() {
 
@@ -50,7 +50,8 @@ class todoListPage extends Component {
 			<Container>
 				<h4>Todo List</h4>
 				<AddNewRow />
-				<ListTodo {...this.props} />
+				<ListTodo 
+					{...this.props} />
 			</Container>
 		)
 	}
@@ -60,4 +61,4 @@ const mapStateToProps = state => {
 	return { tasks: state.tasks };
 };
 
-export default connect(mapStateToProps)(todoListPage);
+export default connect(mapStateToProps)(TodoListPage);
