@@ -42,6 +42,14 @@ class AddTodoPage extends Component {
 		this.context.router.history.push(`/todo`);
 	}
 
+	// submitNewTodo = event => {
+	// 	event.preventDefault();
+	// 	this.props.addTodoItem(this.state.item);
+	// 	window.setTimeout(function () {
+	// 		this.context.router.history.push(`/todo`);
+	// 	}.bind(this), 2000);
+	// }
+
 	render() {
 
 		return (
