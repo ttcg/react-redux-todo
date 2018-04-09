@@ -9,7 +9,9 @@ const TodoRow = props => {
 
     const generateClass = todo => {
         
-        if (todo.doneBy && todo.hasDone === false) {
+        if (todo.doneBy 
+            && todo.hasDone === false
+            && Date.parse(todo.doneBy) < new Date() ) {
             return "text-danger";
         }
     };    
@@ -20,7 +22,7 @@ const TodoRow = props => {
             <td>{item.taskItem}</td>            
             <td className={`text-center ${generateClass(item)}`}>{
                 item.doneBy &&
-                    <Moment date={item.doneBy} format="DD/MM/YYYY" />
+                    <Moment date={item.doneBy} fromNow />
                 }
             </td>
             <td className="text-center">{
