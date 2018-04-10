@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ReactNbsp from 'react-nbsp';
 
 export default class AddTodo extends Component {
 
@@ -29,10 +30,12 @@ export default class AddTodo extends Component {
 					<Col sm={10}>
 						<Input type="date" name="doneBy" value={item.doneBy} onChange={onChange} />
 					</Col>
-				</FormGroup>				
+				</FormGroup>
 				<FormGroup row>
 					<Col sm={{ size: 10, offset: 2 }}>
-						<Button color="primary">Submit</Button>
+						<Button color="primary" onClick={onSave} value='Save'>Save</Button>
+						<ReactNbsp count="3" />
+						<Button color="primary" onClick={onSave} value='Save and New'>Save and New</Button>
 					</Col>
 				</FormGroup>
 				<FormGroup row>
@@ -49,5 +52,6 @@ export default class AddTodo extends Component {
 AddTodo.propTypes = {
 	item: PropTypes.object.isRequired,
 	onChange: PropTypes.func.isRequired,
-	onSave: PropTypes.func.isRequired
+	onSave: PropTypes.func.isRequired,
+	//onSaveNew: PropTypes.func.isRequired,
 }

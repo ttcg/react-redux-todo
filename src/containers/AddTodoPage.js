@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import {
 	Container
@@ -16,6 +17,7 @@ class AddTodoPage extends Component {
 
 		this.state = {
 			item: Object.assign({}, props.item),
+			buttonClicked: '',
 			errors: {}
 		}
 	}
@@ -29,6 +31,11 @@ class AddTodoPage extends Component {
 		router: PropTypes.object
 	}
 
+	componentWillReceiveProps = (nextProps) => {
+		if (nextProps.addTodoSuccess)
+			this.setState({ item : { id: uuidv4(), taskItem: '', doneBy: '' } });
+	}
+
 	updateItemState = event => {
 		const field = event.target.name;
 		let item = this.state.item;
@@ -36,32 +43,31 @@ class AddTodoPage extends Component {
 		return this.setState({ item });
 	}
 
-	submitNewTodo = event => {
-		event.preventDefault();		
+	saveTodo = event => {
+		event.preventDefault();
+		this.setState({ buttonClicked: event.target.value });
 		this.props.addTodoItem(this.state.item);
-		this.context.router.history.push(`/todo`);
 	}
-
-	// submitNewTodo = event => {
-	// 	event.preventDefault();
-	// 	this.props.addTodoItem(this.state.item);
-	// 	window.setTimeout(function () {
-	// 		this.context.router.history.push(`/todo`);
-	// 	}.bind(this), 2000);
-	// }
 
 	render() {
 
+		const { buttonClicked } = this.state;
+		const { addTodoSuccess } = this.props;
+
 		return (
-			<Container>
-				<h4>Add New Todo</h4>
-				<AddTodo
-					item={this.state.item}
-					errors={this.state.errors}
-					onSave={this.submitNewTodo}
-					onChange={this.updateItemState}
-				/>
-			</Container>
+			(addTodoSuccess && buttonClicked === 'Save')
+				? (<Redirect to={"/todo"} />)
+				:
+				<Container>
+					<h4>Add New Todo</h4>
+					<AddTodo
+						item={this.state.item}
+						errors={this.state.errors}
+						onSave={this.saveTodo}
+						//onSaveNew={this.saveAndNewTodo}
+						onChange={this.updateItemState}
+					/>
+				</Container>
 		)
 	}
 }
@@ -70,7 +76,8 @@ const mapStateToProps = (state) => {
 	let item = { id: uuidv4(), taskItem: '', doneBy: '' };
 
 	return {
-		item: item
+		item: item,
+		addTodoSuccess: state.todo.addTodoSuccess
 	};
 }
 
