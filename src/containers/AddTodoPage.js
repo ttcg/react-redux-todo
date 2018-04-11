@@ -5,10 +5,12 @@ import {
 	Container
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import uuidv4 from 'uuid/v4';
 
 import { addTodoItem } from "../actions";
 import AddTodo from '../components/todo/AddTodo';
-import uuidv4 from 'uuid/v4';
+import InlineMessage, { MessageType } from '../components/common/InlineMessage';
+
 
 class AddTodoPage extends Component {
 
@@ -17,7 +19,7 @@ class AddTodoPage extends Component {
 
 		this.state = {
 			item: Object.assign({}, props.item),
-			buttonClicked: '',
+			buttonClicked: '',			
 			errors: {}
 		}
 	}
@@ -43,9 +45,9 @@ class AddTodoPage extends Component {
 		return this.setState({ item });
 	}
 
-	saveTodo = event => {
-		event.preventDefault();
-		this.setState({ buttonClicked: event.target.value });
+	saveTodo = (event, btn) => {
+		event.preventDefault();		
+		this.setState({ buttonClicked: btn });
 		this.props.addTodoItem(this.state.item);
 	}
 
@@ -60,11 +62,11 @@ class AddTodoPage extends Component {
 				:
 				<Container>
 					<h4>Add New Todo</h4>
+					<InlineMessage message="abc" messageType={MessageType.Warning} />
 					<AddTodo
 						item={this.state.item}
 						errors={this.state.errors}
 						onSave={this.saveTodo}
-						//onSaveNew={this.saveAndNewTodo}
 						onChange={this.updateItemState}
 					/>
 				</Container>

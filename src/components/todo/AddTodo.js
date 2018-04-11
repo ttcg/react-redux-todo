@@ -18,7 +18,7 @@ export default class AddTodo extends Component {
 
 		return (
 
-			<Form onSubmit={onSave}>
+			<Form onSubmit={e => onSave(e, 'Save')}>
 				<FormGroup row>
 					<Label for="taskItem" sm={2}>Todo Task</Label>
 					<Col sm={10}>
@@ -33,9 +33,9 @@ export default class AddTodo extends Component {
 				</FormGroup>
 				<FormGroup row>
 					<Col sm={{ size: 10, offset: 2 }}>
-						<Button color="primary" onClick={onSave} value='Save'>Save</Button>
+						<Button color="primary" onClick={e => onSave(e, 'Save')} value='Save'>Save</Button>
 						<ReactNbsp count="3" />
-						<Button color="primary" onClick={onSave} value='Save and New'>Save and New</Button>
+						<Button color="primary" onClick={e => onSave(e, 'SaveAndNew')} value='SaveAndNew'>Save and New</Button>
 					</Col>
 				</FormGroup>
 				<FormGroup row>
