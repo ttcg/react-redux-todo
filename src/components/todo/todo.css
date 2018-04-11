@@ -2,6 +2,10 @@
     color: green;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* div {
     border: 1px solid red;
 } */

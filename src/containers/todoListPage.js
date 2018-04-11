@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
 	Button,
 	Col,
 	Container,
 	Row
 } from 'reactstrap';
-import PropTypes from 'prop-types';
 
 import ListTodo from '../components/todo/ListTodo';
 import { loadTodoItems } from '../actions/';
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     removeTodoItem: index => dispatch(removeTodoItem(index))
-//   };
-// };
-
-//export default connect(mapStateToProps,mapDispatchToProps) (ListTodo);
-
-
 class TodoListPage extends Component {
-
 
 	static propTypes = {
 		tasks: PropTypes.array.isRequired
@@ -34,6 +24,12 @@ class TodoListPage extends Component {
 
 	componentDidMount = () => {
 		this.props.dispatch(loadTodoItems());
+	}
+
+	onDelete = id => {
+		if (window.confirm('Are you sure that you want to delete this record?')) {
+			console.log(id);
+		}
 	}
 
 	render() {
@@ -50,8 +46,9 @@ class TodoListPage extends Component {
 			<Container>
 				<h4>Todo List</h4>
 				<AddNewRow />
-				<ListTodo 
-					{...this.props} />
+				<ListTodo
+					{...this.props}
+					onDelete={this.onDelete} />
 			</Container>
 		)
 	}
@@ -60,5 +57,11 @@ class TodoListPage extends Component {
 const mapStateToProps = state => {
 	return { tasks: state.todo.tasks };
 };
+
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		removeTodoItem: index => dispatch(removeTodoItem(index))
+// 	};
+// };
 
 export default connect(mapStateToProps)(TodoListPage);

@@ -9,7 +9,7 @@ import uuidv4 from 'uuid/v4';
 
 import { addTodoItem } from "../actions";
 import AddTodo from '../components/todo/AddTodo';
-import InlineMessage, { MessageType } from '../components/common/InlineMessage';
+import Message, { MessageType } from '../components/common/Message';
 
 
 class AddTodoPage extends Component {
@@ -62,7 +62,10 @@ class AddTodoPage extends Component {
 				:
 				<Container>
 					<h4>Add New Todo</h4>
-					<InlineMessage message="abc" messageType={MessageType.Warning} />
+					{
+						addTodoSuccess &&
+						<Message message="The item has been added successfully." messageType={MessageType.Success} />
+					}
 					<AddTodo
 						item={this.state.item}
 						errors={this.state.errors}

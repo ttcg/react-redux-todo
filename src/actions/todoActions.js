@@ -6,7 +6,7 @@ export const addTodoItemSuccess = todoItem => ({ type: actionTypes.ADD_TODO_ITEM
 
 export const loadTodoItemsSuccess = items => ({ type: actionTypes.LOAD_TODO_SUCCESS, payload: items });
 
-//export const removeTodoItem = index => ({ type: actionTypes.REMOVE_TODO_ITEM, payload: index });
+export const removeTodoItem = index => ({ type: actionTypes.REMOVE_TODO_ITEM, payload: index });
 
 export const loadTodoItems = () => {
     return function (dispatch) {
