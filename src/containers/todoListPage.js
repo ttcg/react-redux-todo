@@ -10,7 +10,8 @@ import {
 } from 'reactstrap';
 
 import ListTodo from '../components/todo/ListTodo';
-import { loadTodoItems } from '../actions/';
+import { loadTodoItems, removeTodoItem } from '../actions/';
+import Message, { MessageType } from '../components/common/Message';
 
 class TodoListPage extends Component {
 
@@ -22,17 +23,18 @@ class TodoListPage extends Component {
 		tasks: []
 	}
 
-	componentDidMount = () => {
-		this.props.dispatch(loadTodoItems());
-	}
+	componentDidMount = (dispatch) => this.props.loadTodoItems();
+	
 
 	onDelete = id => {
 		if (window.confirm('Are you sure that you want to delete this record?')) {
-			console.log(id);
+			this.props.removeTodoItem(id).then(this.props.loadTodoItems());
 		}
 	}
 
 	render() {
+
+		const { removeTodoSuccess } = this.props;
 
 		const AddNewRow = () => (
 			<Row className="text-right mb-2">
@@ -45,6 +47,10 @@ class TodoListPage extends Component {
 		return (
 			<Container>
 				<h4>Todo List</h4>
+				{
+					removeTodoSuccess &&
+					<Message message="The item has been removed successfully." messageType={MessageType.Success} />
+				}
 				<AddNewRow />
 				<ListTodo
 					{...this.props}
@@ -55,13 +61,17 @@ class TodoListPage extends Component {
 }
 
 const mapStateToProps = state => {
-	return { tasks: state.todo.tasks };
+	return {
+		tasks: state.todo.tasks,
+		removeTodoSuccess: state.todo.removeTodoSuccess
+	};
 };
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		removeTodoItem: index => dispatch(removeTodoItem(index))
-// 	};
-// };
+const mapDispatchToProps = dispatch => {
+	return {
+		loadTodoItems: () => dispatch(loadTodoItems()),
+		removeTodoItem: index => dispatch(removeTodoItem(index))
+	};
+};
 
-export default connect(mapStateToProps)(TodoListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListPage);

@@ -6,7 +6,7 @@ import Header from './common/header';
 import Footer from './common/footer';
 
 import Home from '../components/home/home';
-import About from '../components/about/about';
+import AboutPage from '../containers/AboutPage';
 import AddTodoPage from '../containers/AddTodoPage';
 import TodoListPage from '../containers/TodoListPage';
 
@@ -23,7 +23,7 @@ class App extends Component {
 
 					<Switch>
 						<Route path='(/|/home)' exact component={Home} />
-						<Route path='/about' component={About} />
+						<Route path='/about' component={AboutPage} />
 						<Route path='/todo' exact component={TodoListPage} />
 						<Route path='/todo/add' component={AddTodoPage} />
 					</Switch>
