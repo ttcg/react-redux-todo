@@ -34,12 +34,12 @@ export default class Header extends React.Component {
                     <Nav className="mr-auto" navbar>
                         <NavItem>
                             <NavLink className="nav-link" activeClassName="active" to='/' exact>Home</NavLink>
+                        </NavItem>                        
+                        <NavItem>
+                            <NavLink className="nav-link" activeClassName="active" to='/todo' exact>List</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink className="nav-link" activeClassName="active" to='/todo/add'>Add New</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link" activeClassName="active" to='/todo' exact>List</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink className="nav-link" activeClassName="active" to='/about'>About</NavLink>
