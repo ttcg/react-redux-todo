@@ -3,13 +3,16 @@ import TodoService from '../services/TodoService';
 
 const resetTodoSuccess = () => ({ type: actionTypes.RESET_TODO_SUCCESS });
 
+export const resetTodoUnmount = () => ({ type: actionTypes.RESET_TODO_UNMOUNT });
+
 const addTodoItemSuccess = () => ({ type: actionTypes.ADD_TODO_ITEM_SUCCESS });
+
+export const addTodoUnmount = () => ({ type: actionTypes.ADD_TODO_UNMOUNT });
 
 const loadTodoItemsSuccess = items => ({ type: actionTypes.LOAD_TODO_SUCCESS, payload: items });
 
 const removeTodoItemSuccess = (items) => ({ type: actionTypes.REMOVE_TODO_SUCCESS, payload: items });
 
-export const resetTodo = () => ({ type: actionTypes.RESET_TODO });
 
 export const loadTodoItems = () => {
     return function (dispatch) {

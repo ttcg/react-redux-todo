@@ -23,8 +23,7 @@ class TodoListPage extends Component {
 		tasks: []
 	}
 
-	componentDidMount = (dispatch) => this.props.loadTodoItems();
-	
+	componentDidMount = (dispatch) => this.props.loadTodoItems();	
 
 	onDelete = id => {
 		if (window.confirm('Are you sure that you want to delete this record?')) {

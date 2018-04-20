@@ -8,6 +8,9 @@ var initialState = {
 
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.ADD_TODO_UNMOUNT: {
+            return { ...state, addTodoSuccess: false };
+        }
         case actionTypes.ADD_TODO_ITEM_SUCCESS: {
             return { ...state, addTodoSuccess: true };
         }
@@ -20,7 +23,7 @@ const todoReducer = (state = initialState, action) => {
         case actionTypes.RESET_TODO_SUCCESS: {            
             return { ...state, resetTodoSuccess: true };
         } 
-        case actionTypes.RESET_TODO: {            
+        case actionTypes.RESET_TODO_UNMOUNT: {            
             return { ...state, resetTodoSuccess: false };
         } 
         default:

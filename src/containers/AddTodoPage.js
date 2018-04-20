@@ -7,7 +7,7 @@ import {
 import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
 
-import { addTodoItem } from "../actions";
+import { addTodoItem, addTodoUnmount } from "../actions";
 import AddTodo from '../components/todo/AddTodo';
 import Message, { MessageType } from '../components/common/Message';
 
@@ -37,6 +37,8 @@ class AddTodoPage extends Component {
 		if (nextProps.addTodoSuccess)
 			this.setState({ item : { id: uuidv4(), taskItem: '', doneBy: '' } });
 	}
+
+	componentWillUnmount = () => this.props.addTodoUnmount();
 
 	updateItemState = event => {
 		const field = event.target.name;
@@ -88,7 +90,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addTodoItem: todo => dispatch(addTodoItem(todo))
+		addTodoItem: todo => dispatch(addTodoItem(todo)),
+		addTodoUnmount: () => dispatch(addTodoUnmount())
 	};
 };
 
