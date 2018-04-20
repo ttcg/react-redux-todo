@@ -16,7 +16,10 @@ import Message, { MessageType } from '../components/common/Message';
 class TodoListPage extends Component {
 
 	static propTypes = {
-		tasks: PropTypes.array.isRequired
+		tasks: PropTypes.array.isRequired,
+		removeTodoSuccess: PropTypes.bool.isRequired,
+		loadTodoItems: PropTypes.func.isRequired,
+		removeTodoItem: PropTypes.func.isRequired
 	}
 
 	static defaultProps = {

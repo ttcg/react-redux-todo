@@ -26,7 +26,9 @@ class AddTodoPage extends Component {
 
 	static propTypes = {
 		item: PropTypes.object.isRequired,
-		addTodoItem: PropTypes.func.isRequired
+		addTodoSuccess: PropTypes.bool.isRequired,
+		addTodoItem: PropTypes.func.isRequired,
+		addTodoUnmount: PropTypes.func.isRequired
 	}
 
 	static contextTypes = {
