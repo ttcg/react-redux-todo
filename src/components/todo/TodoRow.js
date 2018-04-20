@@ -7,12 +7,13 @@ import './todo.css';
 const propTypes = {
     i: PropTypes.number.isRequired,
     item: PropTypes.object.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    onMark: PropTypes.func.isRequired
 };
 
 const TodoRow = props => {
 
-    const { i, item, onDelete } = props;
+    const { i, item, onDelete, onMark } = props;
 
     const generateClass = todo => {
         
@@ -22,6 +23,20 @@ const TodoRow = props => {
             return "text-danger";
         }
     };    
+
+    const GenerateMarkButton = todo => {        
+        return todo.hasDone
+            ?
+            <i 
+                onClick={() => onMark(todo.id, false)} 
+                className='fab fa-stripe-s pointer'
+                title="Mark as un-done" />            
+            :
+            <i 
+                onClick={() => onMark(todo.id, true)} 
+                className='fa fa-strikethrough pointer'
+                title="Mark as done" />                  
+    }
 
     return (
         <tr>
@@ -37,8 +52,8 @@ const TodoRow = props => {
                     <i className="fas fa-check-circle fa-2x doneItem" /> 
                 }
             </td>
-            <td className="text-center">
-                <i className="fa pointer fa-strikethrough" title="Mark as done"></i><ReactNbsp count="3" />
+            <td className="text-center">            
+                {GenerateMarkButton(item)}<ReactNbsp count="3" />
                 <i title="Edit" className="fa pointer fa-pencil-alt" style={{color: "#E85B0C"}} /><ReactNbsp count="3" />
                 <i title="Remove" className="fa pointer fa-trash-alt" style={{color: "red"}} onClick={() => onDelete(item.id)} />
             </td>

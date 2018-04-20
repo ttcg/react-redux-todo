@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 
 import ListTodo from '../components/todo/ListTodo';
-import { loadTodoItems, removeTodoItem } from '../actions/';
+import { loadTodoItems, removeTodoItem, markTodoItem } from '../actions/';
 import Message, { MessageType } from '../components/common/Message';
 
 class TodoListPage extends Component {
@@ -18,12 +18,10 @@ class TodoListPage extends Component {
 	static propTypes = {
 		tasks: PropTypes.array.isRequired,
 		removeTodoSuccess: PropTypes.bool.isRequired,
+		markTodoSuccess: PropTypes.bool.isRequired,
 		loadTodoItems: PropTypes.func.isRequired,
-		removeTodoItem: PropTypes.func.isRequired
-	}
-
-	static defaultProps = {
-		tasks: []
+		removeTodoItem: PropTypes.func.isRequired,
+		markTodoItem: PropTypes.func.isRequired
 	}
 
 	componentDidMount = (dispatch) => this.props.loadTodoItems();	
@@ -34,9 +32,13 @@ class TodoListPage extends Component {
 		}
 	}
 
+	onMark = (id, hasDone) => {
+		this.props.markTodoItem(id, hasDone);
+	}
+
 	render() {
 
-		const { removeTodoSuccess } = this.props;
+		const { removeTodoSuccess, markTodoSuccess } = this.props;
 
 		const AddNewRow = () => (
 			<Row className="text-right mb-2">
@@ -53,10 +55,16 @@ class TodoListPage extends Component {
 					removeTodoSuccess &&
 					<Message message="The item has been removed successfully." messageType={MessageType.Success} />
 				}
+				{
+					markTodoSuccess &&
+					<Message message="The item has been marked successfully." messageType={MessageType.Success} />
+				}
 				<AddNewRow />
 				<ListTodo
 					{...this.props}
-					onDelete={this.onDelete} />
+					onDelete={this.onDelete}
+					onMark={this.onMark}
+					/>
 			</Container>
 		)
 	}
@@ -65,14 +73,16 @@ class TodoListPage extends Component {
 const mapStateToProps = state => {
 	return {
 		tasks: state.todo.tasks,
-		removeTodoSuccess: state.todo.removeTodoSuccess
+		removeTodoSuccess: state.todo.removeTodoSuccess,
+		markTodoSuccess: state.todo.markTodoSuccess
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
 		loadTodoItems: () => dispatch(loadTodoItems()),
-		removeTodoItem: index => dispatch(removeTodoItem(index))
+		removeTodoItem: index => dispatch(removeTodoItem(index)),
+		markTodoItem: (id, data) => dispatch(markTodoItem(id, data))
 	};
 };
 

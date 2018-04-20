@@ -13,6 +13,8 @@ const loadTodoItemsSuccess = items => ({ type: actionTypes.LOAD_TODO_SUCCESS, pa
 
 const removeTodoItemSuccess = (items) => ({ type: actionTypes.REMOVE_TODO_SUCCESS, payload: items });
 
+const markTodoItemSuccess = (items) => ({ type: actionTypes.MARK_TODO_SUCCESS, payload: items });
+
 
 export const loadTodoItems = () => {
     return function (dispatch) {
@@ -44,6 +46,16 @@ export const resetTodoItem = () => {
     return function (dispatch) {
         return TodoService.reset().then(() => {
             dispatch(resetTodoSuccess());
+        });
+    };
+}
+
+export const markTodoItem = (id, data) => {
+    return function (dispatch) {
+        return TodoService.mark(id, data).then(() => {
+            return TodoService.getAll().then(items => {
+                dispatch(markTodoItemSuccess(items));
+            });
         });
     };
 }

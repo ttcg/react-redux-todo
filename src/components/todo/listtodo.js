@@ -9,19 +9,21 @@ import TodoRow from './TodoRow';
 
 const propTypes = {
     tasks: PropTypes.array.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    onMark: PropTypes.func.isRequired
 };
 
 const ListTodo = props => {
 
-    const { tasks, onDelete } = props;
+    const { tasks, onDelete, onMark } = props;
 
     const rows = tasks.map((item, i) => (
         <TodoRow
             key={item.id}
             item={item}
             i={i}
-            onDelete={onDelete} />
+            onDelete={onDelete}
+            onMark={onMark} />
     ));
 
     return (
