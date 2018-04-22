@@ -5,16 +5,20 @@ var initialState = {
     resetTodoSuccess: false,
     addTodoSuccess: false,
     removeTodoSuccess: false,
-    markTodoSuccess: false
+    markTodoSuccess: false,
+    redirectToListPage: false
 }
 
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_TODO_UNMOUNT: {
-            return { ...state, addTodoSuccess: false };
+            return { ...state, addTodoSuccess: false, redirectToListPage: false };
         }
         case actionTypes.ADD_TODO_ITEM_SUCCESS: {
-            return { ...state, addTodoSuccess: true };
+            return { ...state, addTodoSuccess: true, redirectToListPage: true };
+        }
+        case actionTypes.SAVE_NEW_TODO_ITEM_SUCCESS: {
+            return { ...state, addTodoSuccess: true, redirectToListPage: false };
         }
         case actionTypes.LOAD_TODO_SUCCESS: {
             return { ...state, 

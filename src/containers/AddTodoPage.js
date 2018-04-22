@@ -7,7 +7,7 @@ import {
 import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
 
-import { addTodoItem, addTodoUnmount } from "../actions";
+import { addTodoItem, addTodoUnmount, saveNewTodoItem } from "../actions";
 import AddTodo from '../components/todo/AddTodo';
 import Message, { MessageType } from '../components/common/Message';
 
@@ -19,7 +19,6 @@ class AddTodoPage extends Component {
 
 		this.state = {
 			item: Object.assign({}, props.item),
-			buttonClicked: '',			
 			errors: {}
 		}
 	}
@@ -27,8 +26,10 @@ class AddTodoPage extends Component {
 	static propTypes = {
 		item: PropTypes.object.isRequired,
 		addTodoSuccess: PropTypes.bool.isRequired,
+		redirectToListPage: PropTypes.bool.isRequired,
 		addTodoItem: PropTypes.func.isRequired,
-		addTodoUnmount: PropTypes.func.isRequired
+		addTodoUnmount: PropTypes.func.isRequired,
+		saveNewTodoItem: PropTypes.func.isRequired
 	}
 
 	static contextTypes = {
@@ -50,18 +51,20 @@ class AddTodoPage extends Component {
 	}
 
 	saveTodo = (event, btn) => {
-		event.preventDefault();		
-		this.setState({ buttonClicked: btn });
-		this.props.addTodoItem(this.state.item);
+		event.preventDefault();
+
+		if (btn === 'Save')
+			this.props.addTodoItem(this.state.item);
+		else
+			this.props.saveNewTodoItem(this.state.item);
 	}
 
 	render() {
-
-		const { buttonClicked } = this.state;
-		const { addTodoSuccess } = this.props;
-
+		
+		const { addTodoSuccess, redirectToListPage } = this.props;
+		
 		return (
-			(addTodoSuccess && buttonClicked === 'Save')
+				redirectToListPage
 				? (<Redirect to={"/todo"} />)
 				:
 				<Container>
@@ -86,14 +89,16 @@ const mapStateToProps = (state) => {
 
 	return {
 		item: item,
-		addTodoSuccess: state.todo.addTodoSuccess
+		addTodoSuccess: state.todo.addTodoSuccess,
+		redirectToListPage: state.todo.redirectToListPage
 	};
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
 		addTodoItem: todo => dispatch(addTodoItem(todo)),
-		addTodoUnmount: () => dispatch(addTodoUnmount())
+		addTodoUnmount: () => dispatch(addTodoUnmount()),
+		saveNewTodoItem: todo => dispatch(saveNewTodoItem(todo))
 	};
 };
 

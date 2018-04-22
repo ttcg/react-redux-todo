@@ -7,6 +7,8 @@ export const resetTodoUnmount = () => ({ type: actionTypes.RESET_TODO_UNMOUNT })
 
 const addTodoItemSuccess = () => ({ type: actionTypes.ADD_TODO_ITEM_SUCCESS });
 
+const saveNewTodoItemSuccess = () => ({ type: actionTypes.SAVE_NEW_TODO_ITEM_SUCCESS });
+
 export const addTodoUnmount = () => ({ type: actionTypes.ADD_TODO_UNMOUNT });
 
 const loadTodoItemsSuccess = items => ({ type: actionTypes.LOAD_TODO_SUCCESS, payload: items });
@@ -28,6 +30,14 @@ export const addTodoItem = (item) => {
     return function (dispatch) {
         return TodoService.add(item).then(() => {
             dispatch(addTodoItemSuccess());
+        });
+    };
+}
+
+export const saveNewTodoItem = (item) => {
+    return function (dispatch) {
+        return TodoService.add(item).then(() => {
+            dispatch(saveNewTodoItemSuccess());
         });
     };
 }
