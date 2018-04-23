@@ -9,6 +9,7 @@ import Home from '../components/home/home';
 import AboutPage from '../containers/AboutPage';
 import AddTodoPage from '../containers/AddTodoPage';
 import TodoListPage from '../containers/TodoListPage';
+import EditTodoPage from '../containers/EditTodoPage';
 
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
 						<Route path='(/|/home)' exact component={Home} />
 						<Route path='/about' component={AboutPage} />
 						<Route path='/todo' exact component={TodoListPage} />
+						<Route path='/todo/:id' component={EditTodoPage} />
 						<Route path='/todo/add' component={AddTodoPage} />
 					</Switch>
 

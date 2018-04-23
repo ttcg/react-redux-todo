@@ -2,6 +2,7 @@ import React from 'react'
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import ReactNbsp from 'react-nbsp';
+import { Link } from 'react-router-dom';
 import './todo.css';
 
 const propTypes = {
@@ -54,7 +55,8 @@ const TodoRow = props => {
             </td>
             <td className="text-center">            
                 {GenerateMarkButton(item)}<ReactNbsp count="3" />
-                <i title="Edit" className="fa pointer fa-pencil-alt" style={{color: "#E85B0C"}} /><ReactNbsp count="3" />
+                <Link to={`todo/${item.id}`} className="fa pointer fa-pencil-alt" style={{color: "#E85B0C"}} />
+                <ReactNbsp count="3" />
                 <i title="Remove" className="fa pointer fa-trash-alt" style={{color: "red"}} onClick={() => onDelete(item.id)} />
             </td>
         </tr>
