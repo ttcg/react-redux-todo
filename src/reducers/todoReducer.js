@@ -4,6 +4,7 @@ var initialState = {
     tasks: [],
     resetTodoSuccess: false,
     addTodoSuccess: false,
+    editTodoSuccess: false,
     removeTodoSuccess: false,
     markTodoSuccess: false,
     redirectToListPage: false
@@ -26,7 +27,8 @@ const todoReducer = (state = initialState, action) => {
                 addTodoSuccess: false, 
                 removeTodoSuccess: false, 
                 resetTodoSuccess: false, 
-                markTodoSuccess: false 
+                markTodoSuccess: false,
+                updateTodoSuccess: false
             };
         }
         case actionTypes.REMOVE_TODO_SUCCESS: {            
@@ -40,6 +42,12 @@ const todoReducer = (state = initialState, action) => {
         } 
         case actionTypes.MARK_TODO_SUCCESS: {            
             return { ...state, tasks: action.payload, markTodoSuccess: true };            
+        }
+        case actionTypes.GET_TODO_ITEM_SUCCESS: {   
+            return { ...state, task: action.payload };            
+        }
+        case actionTypes.UPDATE_TODO_SUCCESS: {
+            return { ...state, updateTodoSuccess: true };
         }
         default:
             return state;

@@ -17,6 +17,10 @@ const removeTodoItemSuccess = (items) => ({ type: actionTypes.REMOVE_TODO_SUCCES
 
 const markTodoItemSuccess = (items) => ({ type: actionTypes.MARK_TODO_SUCCESS, payload: items });
 
+const getTodoItemSuccess = (item) => ({ type: actionTypes.GET_TODO_ITEM_SUCCESS, payload: item });
+
+const updateTodoItemSuccess = (items) => ({ type: actionTypes.UPDATE_TODO_SUCCESS, payload: items });
+
 
 export const loadTodoItems = () => {
     return function (dispatch) {
@@ -66,6 +70,22 @@ export const markTodoItem = (id, data) => {
             return TodoService.getAll().then(items => {
                 dispatch(markTodoItemSuccess(items));
             });
+        });
+    };
+}
+
+export const getTodoItem = (id) => {
+    return function (dispatch) {
+        return TodoService.get(id).then(item => {
+            dispatch(getTodoItemSuccess(item));
+        });
+    };
+}
+
+export const updateTodoItem = (id, data) => {
+    return function (dispatch) {
+        return TodoService.update(id, data).then(() => {
+            dispatch(updateTodoItemSuccess());
         });
     };
 }
