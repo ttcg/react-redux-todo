@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import TodoService from '../services/TodoService';
+import { beginAjaxCall } from "./ajaxStatusActions";
 
 const resetTodoSuccess = () => ({ type: actionTypes.RESET_TODO_SUCCESS });
 
@@ -24,6 +25,7 @@ const updateTodoItemSuccess = (items) => ({ type: actionTypes.UPDATE_TODO_SUCCES
 
 export const loadTodoItems = () => {
     return function (dispatch) {
+        dispatch(beginAjaxCall());
         return TodoService.getAll().then(items => {
             dispatch(loadTodoItemsSuccess(items));
         });
@@ -31,7 +33,8 @@ export const loadTodoItems = () => {
 }
 
 export const addTodoItem = (item) => {
-    return function (dispatch) {
+    return function (dispatch) {       
+        dispatch(beginAjaxCall()); 
         return TodoService.add(item).then(() => {
             dispatch(addTodoItemSuccess());
         });
@@ -40,6 +43,7 @@ export const addTodoItem = (item) => {
 
 export const saveNewTodoItem = (item) => {
     return function (dispatch) {
+        dispatch(beginAjaxCall()); 
         return TodoService.add(item).then(() => {
             dispatch(saveNewTodoItemSuccess());
         });
@@ -48,6 +52,7 @@ export const saveNewTodoItem = (item) => {
 
 export const removeTodoItem = (id) => {
     return function (dispatch) {
+        dispatch(beginAjaxCall()); 
         return TodoService.remove(id).then(() => {
             return TodoService.getAll().then(items => {
                 dispatch(removeTodoItemSuccess(items));
@@ -66,6 +71,7 @@ export const resetTodoItem = () => {
 
 export const markTodoItem = (id, data) => {
     return function (dispatch) {
+        dispatch(beginAjaxCall()); 
         return TodoService.mark(id, data).then(() => {
             return TodoService.getAll().then(items => {
                 dispatch(markTodoItemSuccess(items));
@@ -76,6 +82,7 @@ export const markTodoItem = (id, data) => {
 
 export const getTodoItem = (id) => {
     return function (dispatch) {
+        dispatch(beginAjaxCall()); 
         return TodoService.get(id).then(item => {
             dispatch(getTodoItemSuccess(item));
         });
@@ -84,6 +91,7 @@ export const getTodoItem = (id) => {
 
 export const updateTodoItem = (id, data) => {
     return function (dispatch) {
+        dispatch(beginAjaxCall()); 
         return TodoService.update(id, data).then(() => {
             dispatch(updateTodoItemSuccess());
         });

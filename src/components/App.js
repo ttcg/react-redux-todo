@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Header from './common/header';
 import Footer from './common/footer';
@@ -10,6 +11,7 @@ import AboutPage from '../containers/AboutPage';
 import AddTodoPage from '../containers/AddTodoPage';
 import TodoListPage from '../containers/TodoListPage';
 import EditTodoPage from '../containers/EditTodoPage';
+import Loading from "./common/LoadingSpinner";
 
 
 class App extends Component {
@@ -27,10 +29,12 @@ class App extends Component {
 						<Route path='/about' component={AboutPage} />
 						<Route path='/todo' exact component={TodoListPage} />
 						<Route path='/todo/add' component={AddTodoPage} />
-						<Route path='/todo/:id' component={EditTodoPage} />						
+						<Route path='/todo/:id' component={EditTodoPage} />
 					</Switch>
 
 					<Footer />
+
+					{this.props.loading && <Loading />}
 
 				</React.Fragment>
 			</BrowserRouter>
@@ -39,4 +43,11 @@ class App extends Component {
 	}
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		loading: state.ajaxStatus > 0
+	}
+}
+
+
+export default connect(mapStateToProps)(App);
