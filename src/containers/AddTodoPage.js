@@ -19,6 +19,7 @@ class AddTodoPage extends Component {
 
 		this.state = {
 			item: Object.assign({}, props.item),
+			isSaving: false,
 			errors: {}
 		}
 	}
@@ -51,17 +52,24 @@ class AddTodoPage extends Component {
 	}
 
 	saveTodo = (event, btn) => {
-		event.preventDefault();
-
+		event.preventDefault();		
 		if (btn === 'Save')
-			this.props.addTodoItem(this.state.item);
-		else
-			this.props.saveNewTodoItem(this.state.item);
+			this.props.addTodoItem(this.state.item).then(() => {
+				console.log('you can use the premise here to redirect and load latest data');
+			});
+		else {
+			this.setState({ isSaving : true });
+			this.props.saveNewTodoItem(this.state.item).then(() => {
+				this.setState({ isSaving : false });
+				console.log('you can use the premise here to redirect and load latest data');
+			});
+		}
 	}
 
 	render() {
 		
 		const { addTodoSuccess, redirectToListPage } = this.props;
+		const { isSaving, item } = this.state;
 		
 		return (
 				redirectToListPage
@@ -74,10 +82,11 @@ class AddTodoPage extends Component {
 						<Message message="The item has been added successfully." messageType={MessageType.Success} />
 					}
 					<AddTodo
-						item={this.state.item}
+						item={item}
 						errors={this.state.errors}
 						onSave={this.saveTodo}
 						onChange={this.updateItemState}
+						isSaving={isSaving}
 					/>
 				</Container>
 		)

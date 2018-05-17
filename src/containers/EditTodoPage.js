@@ -19,7 +19,8 @@ export class EditTodoPage extends Component {
         super(props)
         let item = { id: '', taskItem: '', doneBy: '', hasDone: false };
         this.state = {
-            item: item
+            item: item,
+            isSaving: false            
         }
     }
 
@@ -51,12 +52,16 @@ export class EditTodoPage extends Component {
 
     saveTodo = (event) => {
         event.preventDefault();
-        this.props.updateTodoItem(this.state.item.id, this.state.item);
+
+        this.setState({ isSaving : true });
+        this.props.updateTodoItem(this.state.item.id, this.state.item).then(() => {
+            this.setState({ isSaving : false });
+        });
     }
 
     render() {
 
-        const { item } = this.state;
+        const { item, isSaving } = this.state;
 
         const { updateTodoSuccess } = this.props;
 
@@ -70,7 +75,8 @@ export class EditTodoPage extends Component {
                 <EditTodo
                     item={item}
                     onChange={this.updateItemState}
-                    onSave={this.saveTodo} />
+                    onSave={this.saveTodo}
+                    isSaving={isSaving} />
             </Container>
         )
     }

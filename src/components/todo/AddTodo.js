@@ -14,12 +14,13 @@ import ReactNbsp from 'react-nbsp';
 const propTypes = {
 	item: PropTypes.object.isRequired,
 	onChange: PropTypes.func.isRequired,
-	onSave: PropTypes.func.isRequired
+	onSave: PropTypes.func.isRequired,
+	isSaving: PropTypes.bool.isRequired
 }
 
 const AddTodo = (props) => {
 
-	const { item, onChange, onSave } = props;
+	const { item, onChange, onSave, isSaving } = props;
 
 	return (
 
@@ -38,9 +39,9 @@ const AddTodo = (props) => {
 			</FormGroup>
 			<FormGroup row>
 				<Col sm={{ size: 10, offset: 2 }}>
-					<Button color="primary" onClick={e => onSave(e, 'Save')} value='Save'>Save</Button>
+					<Button color="primary" disabled={isSaving} onClick={e => onSave(e, 'Save')} value='Save'>{isSaving ? 'Saving...' : 'Save'}</Button>
 					<ReactNbsp count="3" />
-					<Button color="primary" onClick={e => onSave(e, 'SaveAndNew')} value='SaveAndNew'>Save and New</Button>
+					<Button color="primary" disabled={isSaving} onClick={e => onSave(e, 'SaveAndNew')} value='SaveAndNew'>{isSaving ? 'Saving...' : 'Save and New'}</Button>
 				</Col>
 			</FormGroup>
 			<FormGroup row>

@@ -14,10 +14,11 @@ import moment from 'moment';
 const propTypes = {
 	item: PropTypes.object.isRequired,
 	onChange: PropTypes.func.isRequired,
-	onSave: PropTypes.func.isRequired
+	onSave: PropTypes.func.isRequired,
+	isSaving: PropTypes.bool.isRequired
 }
 
-const EditTodo = ({ item, onChange, onSave }) => {
+const EditTodo = ({ item, onChange, onSave, isSaving }) => {
 
 	return (
 
@@ -53,7 +54,7 @@ const EditTodo = ({ item, onChange, onSave }) => {
 			</FormGroup>
 			<FormGroup row>
 				<Col sm={{ size: 10, offset: 2 }}>
-					<Button color="primary" onClick={e => onSave(e)} value='Save'>Save</Button>
+					<Button color="primary" disabled={isSaving} onClick={e => onSave(e)} value='Save'>{isSaving ? 'Saving...' : 'Save'}</Button>
 				</Col>
 			</FormGroup>
 			<FormGroup row>
