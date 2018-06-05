@@ -37,9 +37,21 @@ class AddTodoPage extends Component {
 		router: PropTypes.object
 	}
 
-	componentWillReceiveProps = (nextProps) => {
+	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log('nextProps.addTodoSuccess: ' + nextProps.addTodoSuccess);
 		if (nextProps.addTodoSuccess)
-			this.setState({ item : { id: uuidv4(), taskItem: '', doneBy: '' } });
+			if (nextProps.item !== prevState.item) {
+				return {
+					item: { id: uuidv4(), taskItem: '', doneBy: '' }
+				};
+			}
+
+		return null;
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log('prev' + prevState.item.taskItem);
+		console.log('current' + prevState.item.taskItem);
 	}
 
 	componentWillUnmount = () => this.props.addTodoUnmount();
@@ -52,27 +64,25 @@ class AddTodoPage extends Component {
 	}
 
 	saveTodo = (event, btn) => {
-		event.preventDefault();		
+		event.preventDefault();
 		if (btn === 'Save')
-			this.props.addTodoItem(this.state.item).then(() => {
-				console.log('you can use the premise here to redirect and load latest data');
-			});
+			this.props.addTodoItem(this.state.item);
 		else {
-			this.setState({ isSaving : true });
+			this.setState({ isSaving: true });
 			this.props.saveNewTodoItem(this.state.item).then(() => {
-				this.setState({ isSaving : false });
+				this.setState({ isSaving: false });
 				console.log('you can use the premise here to redirect and load latest data');
 			});
 		}
 	}
 
 	render() {
-		
+
 		const { addTodoSuccess, redirectToListPage } = this.props;
 		const { isSaving, item } = this.state;
-		
+
 		return (
-				redirectToListPage
+			redirectToListPage
 				? (<Redirect to={"/todo"} />)
 				:
 				<Container>
