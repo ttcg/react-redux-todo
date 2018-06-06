@@ -21,7 +21,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<React.Fragment>
-					<React.StrictMode>
+					{/* <React.StrictMode> */}
 						<Header />
 
 						<Switch>
@@ -35,7 +35,7 @@ class App extends Component {
 						<Footer />
 
 						{this.props.loading && <Loading />}
-					</React.StrictMode>
+					{/* </React.StrictMode> */}
 				</React.Fragment>
 			</BrowserRouter>
 
