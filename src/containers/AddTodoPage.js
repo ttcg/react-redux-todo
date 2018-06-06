@@ -19,6 +19,7 @@ class AddTodoPage extends Component {
 
 		this.state = {
 			item: Object.assign({}, props.item),
+			isEditing: false,
 			isSaving: false,
 			errors: {}
 		}
@@ -37,22 +38,15 @@ class AddTodoPage extends Component {
 		router: PropTypes.object
 	}
 
-	static getDerivedStateFromProps(nextProps, prevState) {
-		console.log('nextProps.addTodoSuccess: ' + nextProps.addTodoSuccess);
-		if (nextProps.addTodoSuccess)
-			if (nextProps.item !== prevState.item) {
-				return {
-					item: { id: uuidv4(), taskItem: '', doneBy: '' }
-				};
-			}
+	// static getDerivedStateFromProps(nextProps, prevState) {	
+	// 	if (nextProps.addTodoSuccess && !prevState.isEditing) {			
+	// 			return {
+	// 				item: { id: uuidv4(), taskItem: '', doneBy: '' }
+	// 			};
+	// 		}
 
-		return null;
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		console.log('prev' + prevState.item.taskItem);
-		console.log('current' + prevState.item.taskItem);
-	}
+	// 	return null;
+	// }
 
 	componentWillUnmount = () => this.props.addTodoUnmount();
 
@@ -60,7 +54,7 @@ class AddTodoPage extends Component {
 		const field = event.target.name;
 		let item = this.state.item;
 		item[field] = event.target.value;
-		return this.setState({ item });
+		return this.setState({ item, isEditing : true });
 	}
 
 	saveTodo = (event, btn) => {
@@ -68,10 +62,11 @@ class AddTodoPage extends Component {
 		if (btn === 'Save')
 			this.props.addTodoItem(this.state.item);
 		else {
-			this.setState({ isSaving: true });
-			this.props.saveNewTodoItem(this.state.item).then(() => {
+			this.setState({ isSaving: true, isEditing : false });
+			this.props.saveNewTodoItem(this.state.item).then(() => {				
 				this.setState({ isSaving: false });
-				console.log('you can use the premise here to redirect and load latest data');
+				if (this.props.addTodoSuccess)
+					this.setState({ item: { id: uuidv4(), taskItem: '', doneBy: '' } });
 			});
 		}
 	}
@@ -122,4 +117,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodoPage)
-
