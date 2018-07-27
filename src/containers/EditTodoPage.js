@@ -24,19 +24,17 @@ export class EditTodoPage extends Component {
         }
     }
 
-    componentWillReceiveProps = (nextProps) => {
+    static getDerivedStateFromProps(nextProps, prevState) {	
         if (nextProps.item)
-            this.setState({ item: nextProps.item });
-        else if (nextProps.id) {
-            this.props.getTodoItem(nextProps.id);
-        }
-    }
+            return { item: nextProps.item };
 
+        return null;
+    }
 
     componentDidMount() {
         if (this.props.id) {
             this.props.getTodoItem(this.props.id);
-        }
+        }        
     }
 
     updateItemState = event => {

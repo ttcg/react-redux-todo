@@ -19,6 +19,7 @@ class AddTodoPage extends Component {
 
 		this.state = {
 			item: Object.assign({}, props.item),
+			isEditing: false,
 			isSaving: false,
 			errors: {}
 		}
@@ -37,10 +38,15 @@ class AddTodoPage extends Component {
 		router: PropTypes.object
 	}
 
-	componentWillReceiveProps = (nextProps) => {
-		if (nextProps.addTodoSuccess)
-			this.setState({ item : { id: uuidv4(), taskItem: '', doneBy: '' } });
-	}
+	// static getDerivedStateFromProps(nextProps, prevState) {	
+	// 	if (nextProps.addTodoSuccess && !prevState.isEditing) {			
+	// 			return {
+	// 				item: { id: uuidv4(), taskItem: '', doneBy: '' }
+	// 			};
+	// 		}
+
+	// 	return null;
+	// }
 
 	componentWillUnmount = () => this.props.addTodoUnmount();
 
@@ -48,31 +54,30 @@ class AddTodoPage extends Component {
 		const field = event.target.name;
 		let item = this.state.item;
 		item[field] = event.target.value;
-		return this.setState({ item });
+		return this.setState({ item, isEditing : true });
 	}
 
 	saveTodo = (event, btn) => {
-		event.preventDefault();		
+		event.preventDefault();
 		if (btn === 'Save')
-			this.props.addTodoItem(this.state.item).then(() => {
-				console.log('you can use the premise here to redirect and load latest data');
-			});
+			this.props.addTodoItem(this.state.item);
 		else {
-			this.setState({ isSaving : true });
-			this.props.saveNewTodoItem(this.state.item).then(() => {
-				this.setState({ isSaving : false });
-				console.log('you can use the premise here to redirect and load latest data');
+			this.setState({ isSaving: true, isEditing : false });
+			this.props.saveNewTodoItem(this.state.item).then(() => {				
+				this.setState({ isSaving: false });
+				if (this.props.addTodoSuccess)
+					this.setState({ item: { id: uuidv4(), taskItem: '', doneBy: '' } });
 			});
 		}
 	}
 
 	render() {
-		
+
 		const { addTodoSuccess, redirectToListPage } = this.props;
 		const { isSaving, item } = this.state;
-		
+
 		return (
-				redirectToListPage
+			redirectToListPage
 				? (<Redirect to={"/todo"} />)
 				:
 				<Container>
@@ -112,4 +117,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodoPage)
-

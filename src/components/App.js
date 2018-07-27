@@ -21,21 +21,21 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<React.Fragment>
+					{/* <React.StrictMode> */}
+						<Header />
 
-					<Header />
+						<Switch>
+							<Route path='(/|/home)' exact component={Home} />
+							<Route path='/about' component={AboutPage} />
+							<Route path='/todo' exact component={TodoListPage} />
+							<Route path='/todo/add' component={AddTodoPage} />
+							<Route path='/todo/:id' component={EditTodoPage} />
+						</Switch>
 
-					<Switch>
-						<Route path='(/|/home)' exact component={Home} />
-						<Route path='/about' component={AboutPage} />
-						<Route path='/todo' exact component={TodoListPage} />
-						<Route path='/todo/add' component={AddTodoPage} />
-						<Route path='/todo/:id' component={EditTodoPage} />
-					</Switch>
+						<Footer />
 
-					<Footer />
-
-					{this.props.loading && <Loading />}
-
+						{this.props.loading && <Loading />}
+					{/* </React.StrictMode> */}
 				</React.Fragment>
 			</BrowserRouter>
 
