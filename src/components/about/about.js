@@ -13,7 +13,7 @@ const About = () => {
 				<li>ReactStrap@Next</li>
 				<li>React-Thunk</li>
 			</ul>
-			<p>The source code can be found on <a href="https://www.youtube.com/watch?v=yVMDiKhTBLA" target="_blank" rel="noopener noreferrer">github</a></p>		
+			<p>The source code can be found on <a href="https://github.com/ttcg/react-redux-todo" target="_blank" rel="noopener noreferrer">github</a></p>		
 		</React.Fragment>
 	);
 }
